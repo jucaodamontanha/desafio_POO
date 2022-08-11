@@ -16,19 +16,19 @@ public class Dev {
         bootcamp.getDevsInscritos().add(this);
     }
 
-    public void progredir(){
-       Optional<Conteudo> conteudo = this.conteudosInscritos.stream().findFirst();
-       if (conteudo.isPresent()){
-           this.conteudosConcluidos.add(conteudo.get());
-           this.conteudosInscritos.remove(conteudo.get());
-    }else {
-           System.err.println("Voce nao esta matriculado em nenhum conteudo!");
-       }
-
+    public void progredir() {
+        Optional<Conteudo> conteudo = this.conteudosInscritos.stream().findFirst();
+        if (conteudo.isPresent()) {
+            this.conteudosConcluidos.add(conteudo.get());
+            this.conteudosInscritos.remove(conteudo.get());
+        } else {
+            System.err.println("Voce nao esta matriculado em nenhum conteudo!");
+        }
+    }
     public double calcularTotalXp(){
          return this.conteudosConcluidos
                  .stream()
-                 .mapToDouble(Conteudo -> conteudo.calcularXp())
+                 .mapToDouble(Conteudo::calcularXp)
                  .sum();
         }
 
@@ -69,4 +69,4 @@ public class Dev {
         return Objects.hash(nome, conteudosInscritos, conteudosConcluidos);
     }
 }
-}
+
